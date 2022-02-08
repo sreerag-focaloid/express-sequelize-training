@@ -65,6 +65,7 @@ exports.createWholeUser = async (req, res) => {
     console.log("error");
     if (transaction) {
       await transaction.rollback();
+      return res.status(400).json({ message: "Error Occurred", error: err });
     }
   }
 };
