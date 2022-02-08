@@ -23,7 +23,7 @@ exports.createWholeUser = async (req, res) => {
     const createdUser = await db.User.create(userObj, { transaction });
     if (!createdUser) {
       await transaction.rollback();
-      return res.status(200).json({ message: "User Cannot be created" });
+      return res.status(400).json({ message: "User Cannot be created" });
     }
 
     const createdUserId = createdUser.id;
@@ -37,7 +37,7 @@ exports.createWholeUser = async (req, res) => {
     const createdContact = await db.Contact.create(contactObj, { transaction });
     if (!createdContact) {
       await transaction.rollback();
-      return res.status(200).json({ message: "Contact Cannot be created" });
+      return res.status(400).json({ message: "Contact Cannot be created" });
     }
 
     const createdContactId = createdContact.id;
@@ -54,7 +54,7 @@ exports.createWholeUser = async (req, res) => {
     const createdAddress = await db.Address.create(addressObj, { transaction });
     if (!createdAddress) {
       await transaction.rollback();
-      return res.status(200).json({ message: "Address Cannot be created" });
+      return res.status(400).json({ message: "Address Cannot be created" });
     }
 
     console.log("success");
@@ -89,7 +89,7 @@ exports.createUser = async (req, res) => {
     const createdUser = await db.User.create(userObj, { transaction });
     if (!createdUser) {
       await transaction.rollback();
-      return res.status(200).json({ message: "User Cannot be created" });
+      return res.status(400).json({ message: "User Cannot be created" });
     }
 
     if (!contactInfo) {
@@ -108,7 +108,7 @@ exports.createUser = async (req, res) => {
     const createdContact = await db.Contact.create(contactObj, { transaction });
     if (!createdContact) {
       await transaction.rollback();
-      return res.status(200).json({ message: "Contact Cannot be created" });
+      return res.status(400).json({ message: "Contact Cannot be created" });
     }
 
     const createdContactId = createdContact.id;
@@ -125,7 +125,7 @@ exports.createUser = async (req, res) => {
     const createdAddress = await db.Address.create(addressObj, { transaction });
     if (!createdAddress) {
       await transaction.rollback();
-      return res.status(200).json({ message: "Address Cannot be created" });
+      return res.status(400).json({ message: "Address Cannot be created" });
     }
 
     console.log("success");
@@ -136,6 +136,7 @@ exports.createUser = async (req, res) => {
     console.log("error");
     if (transaction) {
       await transaction.rollback();
+      return res.status(400).json({ message: "Error Occurred", error: err });
     }
   }
 };
