@@ -8,6 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     addressLine1: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: {
+          args: [2, 100],
+          msg: "Address line 1  must be between 2 and 100 numbers in length",
+        },
+      },
     },
     addressLine2: {
       type: DataTypes.STRING,

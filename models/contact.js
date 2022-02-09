@@ -10,6 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: {
+          args: [10, 12],
+          msg: "Phone Number must be between 10 and 12 numbers in length",
+        },
+      },
     },
   });
 
